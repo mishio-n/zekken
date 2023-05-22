@@ -10,7 +10,8 @@
     "@vercel/kv": "^0.2.1",
     "@vercel/node": "^2.14.3",
     "react": "18.2.0",
-    "satori": "^0.8.1"
+    "satori": "^0.8.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/node": "20.2.3",
