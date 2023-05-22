@@ -3,20 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "vercel dev"
   },
   "dependencies": {
+    "@vercel/kv": "^0.2.1",
+    "@vercel/node": "^2.14.3",
+    "react": "18.2.0",
+    "satori": "^0.8.1"
+  },
+  "devDependencies": {
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "eslint": "8.41.0",
-    "eslint-config-next": "13.4.3",
-    "next": "13.4.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vercel": "^29.3.6"
   }
 }
