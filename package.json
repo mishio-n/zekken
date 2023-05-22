@@ -5,6 +5,7 @@
   "scripts": {
     "start": "vercel dev"
   },
+  "type": "module",
   "dependencies": {
     "@vercel/kv": "^0.2.1",
     "@vercel/node": "^2.14.3",
