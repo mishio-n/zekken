@@ -1,5 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import fs from "node:fs/promises";
+import satori from "satori";
 import z from "zod";
+import React from "react";
 
 enum ZekkenType {
   derby,
@@ -12,7 +15,9 @@ enum ZekkenType {
   normal,
 }
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+const regular = await fs.readFile("public/Roboto-Regular.ttf");
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { query } = req;
   if (query === undefined) {
     return res.status(400).send("Bad request");
@@ -37,11 +42,20 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
   const race = z.string().nullable().parse(query.race);
 
-  res.status(200).json({
-    message: "Hello world",
-    name,
-    number,
-    type,
-    race,
+  res.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
+
+  const svg = await satori(<div style={{ color: "red" }}>{name}</div>, {
+    width: 48,
+    height: 16,
+    fonts: [
+      {
+        name: "Roboto",
+        data: regular,
+        weight: 400,
+        style: "normal",
+      },
+    ],
   });
+
+  res.status(200).send(svg);
 }
