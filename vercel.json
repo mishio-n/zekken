@@ -5,6 +5,11 @@
       "destination": "/api"
     }
   ],
+  "functions":{
+    "api/*" : {
+      "includeFiles": "assets/*"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
