@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { match } from "ts-pattern";
-import fs from "node:fs/promises";
+import fs from "fs/promises";
 import satori from "satori";
 import z, { ZodError } from "zod";
 import React from "react";
@@ -256,6 +256,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (error instanceof ZodError) {
       return res.status(400).send(error.issues[0].message);
     } else {
+      console.log(error);
       return res.status(500).send("サーバーエラーが発生しました");
     }
   }
