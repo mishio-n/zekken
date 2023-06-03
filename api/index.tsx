@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import satori from "satori";
 import z, { ZodError } from "zod";
 import React from "react";
+import path from "path";
 
 const zekkenType = [
   "derby",
@@ -168,8 +169,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .parse(query.type);
 
     const [robotBold, notoSansJPBlack] = await Promise.all([
-      fs.readFile("/Oxygen-Bold-Number.woff"),
-      fs.readFile("/NotoSansJP-Black_ZenkakuKana.woff"),
+      fs.readFile(
+        path.join(process.cwd(), "assets", "Oxygen-Bold-Number.woff")
+      ),
+      fs.readFile(
+        path.join(process.cwd(), "assets", "NotoSansJP-Black_ZenkakuKana.woff")
+      ),
     ]);
 
     const svg = await satori(
