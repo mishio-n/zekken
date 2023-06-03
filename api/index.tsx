@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { match } from "ts-pattern";
+import { execSync } from "child_process";
 import fs from "fs/promises";
-import satori from "satori";
-import z, { ZodError } from "zod";
 import React from "react";
-import path from "path";
+import satori from "satori";
+import { match } from "ts-pattern";
+import z, { ZodError } from "zod";
 
 const zekkenType = [
   "derby",
@@ -165,16 +165,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return zekkenType.includes(v as any);
       })
       // デフォルトは8大競争
-      .default("g1")
+      .default("classic")
       .parse(query.type);
 
+    execSync("pwd");
+    execSync("ls -la");
     const [robotBold, notoSansJPBlack] = await Promise.all([
-      fs.readFile(
-        path.join(process.cwd(), "assets", "Oxygen-Bold-Number.woff")
-      ),
-      fs.readFile(
-        path.join(process.cwd(), "assets", "NotoSansJP-Black_ZenkakuKana.woff")
-      ),
+      fs.readFile("./assets/Oxygen-Bold-Number.woff"),
+      fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
     ]);
 
     const svg = await satori(
