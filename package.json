@@ -11,6 +11,7 @@
     "@vercel/node": "^2.14.3",
     "react": "18.2.0",
     "satori": "^0.8.1",
+    "ts-pattern": "^4.3.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
