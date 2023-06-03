@@ -98,11 +98,6 @@ const ZENKANKU_KANA = [
   "ー",
 ];
 
-const [robotBold, notoSansJPBlack] = await Promise.all([
-  fs.readFile("./assets/Oxygen-Bold-Number.woff"),
-  fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
-]);
-
 const theme = {
   derby: {
     backgroundColor: "rgb(250,250,250)",
@@ -171,6 +166,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // デフォルトは8大競争
       .default("g1")
       .parse(query.type);
+
+    const [robotBold, notoSansJPBlack] = await Promise.all([
+      fs.readFile("./assets/Oxygen-Bold-Number.woff"),
+      fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
+    ]);
 
     const svg = await satori(
       <div
@@ -252,7 +252,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
     res.status(200).send(svg);
-
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).send(error.issues[0].message);
