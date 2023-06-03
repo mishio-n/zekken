@@ -168,8 +168,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .default("classic")
       .parse(query.type);
 
-    execSync("pwd");
-    execSync("ls -la");
+    console.log(execSync("pwd", { encoding: "utf-8" }));
+    console.log(execSync("ls -la", { encoding: "utf-8" }));
     const [robotBold, notoSansJPBlack] = await Promise.all([
       fs.readFile("./assets/Oxygen-Bold-Number.woff"),
       fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
