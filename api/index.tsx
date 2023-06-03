@@ -169,11 +169,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .default("classic")
       .parse(query.type);
 
-    console.log(execSync("pwd", { encoding: "utf-8" }));
-    console.log(execSync("ls -la", { encoding: "utf-8" }));
     const [robotBold, notoSansJPBlack] = await Promise.all([
-      fs.readFile(path.join(process.cwd(), 'assets', "Oxygen-Bold-Number.woff")),
-      fs.readFile(path.join(process.cwd(), 'assets', "NotoSansJP-Black_ZenkakuKana.woff")),
+      fs.readFile(
+        path.join(process.cwd(), "assets", "number.woff")
+      ),
+      fs.readFile(
+        path.join(process.cwd(), "assets", "zenkakukana.woff")
+      ),
     ]);
 
     const svg = await satori(
