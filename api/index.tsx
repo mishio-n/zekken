@@ -168,8 +168,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .parse(query.type);
 
     const [robotBold, notoSansJPBlack] = await Promise.all([
-      fs.readFile("./assets/Oxygen-Bold-Number.woff"),
-      fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
+      fs.readFile("/Oxygen-Bold-Number.woff"),
+      fs.readFile("/NotoSansJP-Black_ZenkakuKana.woff"),
     ]);
 
     const svg = await satori(
