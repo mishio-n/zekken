@@ -1,5 +1,4 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { execSync } from "child_process";
 import fs from "fs/promises";
 import path from "path";
 import React from "react";
@@ -256,6 +255,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     );
 
+    res.setHeader("Cache-Control", "max-age=864000, public");
     res.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
     res.status(200).send(svg);
   } catch (error) {
