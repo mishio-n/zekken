@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { execSync } from "child_process";
 import fs from "fs/promises";
+import path from "path";
 import React from "react";
 import satori from "satori";
 import { match } from "ts-pattern";
@@ -171,8 +172,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.log(execSync("pwd", { encoding: "utf-8" }));
     console.log(execSync("ls -la", { encoding: "utf-8" }));
     const [robotBold, notoSansJPBlack] = await Promise.all([
-      fs.readFile("./assets/Oxygen-Bold-Number.woff"),
-      fs.readFile("./assets/NotoSansJP-Black_ZenkakuKana.woff"),
+      fs.readFile(path.join(process.cwd(), 'assets', "Oxygen-Bold-Number.woff")),
+      fs.readFile(path.join(process.cwd(), 'assets', "NotoSansJP-Black_ZenkakuKana.woff")),
     ]);
 
     const svg = await satori(
